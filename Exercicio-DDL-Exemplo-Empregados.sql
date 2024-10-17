@@ -1,3 +1,5 @@
+/* DDL */
+
 CREATE TABLE tb_departamento(
     id INT8,
     nome VARCHAR(60),
