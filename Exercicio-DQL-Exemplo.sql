@@ -70,3 +70,21 @@ FROM (
     FROM tb_empregado
     INNER JOIN tb_departamento ON tb_empregado.dept_id = tb_departamento.id
 ) AS juncao;
+
+/* Like, IN e BetWeen */
+
+/* LIKE */
+
+SELECT * FROM tb_seller WHERE name LIKE 'M%';
+
+SELECT * FROM tb_seller WHERE name LIKE '%Silva%';
+
+SELECT * FROM tb_seller WHERE name LIKE '%Silv_%';
+
+/* IN */
+
+SELECT * FROM tb_seller WHERE id IN (2, 4);
+
+/* BETWEEN */
+
+SELECT * FROM tb_sale WHERE date BETWEEN '2022-05-07' AND '2022-05-23';
