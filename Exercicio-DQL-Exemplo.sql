@@ -197,3 +197,55 @@ SELECT MIN(price) FROM tb_sale WHERE price > 500;
 /* MAX */
 
 SELECT MAX(price) FROM tb_sale WHERE price > 500;
+
+/* DISTINCT */
+
+/* Elimina repetições de dados na tabela */
+
+SELECT DISTINCT tb_seller.id, name FROM tb_sale INNER JOIN tb_seller ON tb_seller.id = tb_sale.seller_id WHERE price > 500;
+
+/* ORDER BY, LIMIT, OFFSET */
+
+/* ODER BY seria uma forma mais ordenada de organizar os dados da tabela */
+
+SELECT * FROM tb_sale ORDER BY seller_id, pric;
+
+/* TOP seria as tres primeiras linhas */
+
+SELECT price FROM tb_sale ORDER BY price DESC LIMIT 3;
+
+/* OFFSET seria a forma de pular a quantidade do atributo mencionado */
+
+SELECT * FROM tb_sale ORDER BY price DESC LIMIT 3 OFFSET 0;
+
+/* GROUP BY */
+
+/* uma forma praica para relatorios */
+
+SELECT date, COUNT(date) AS contagem FROM tb_sale GROUP BY date;
+
+SELECT tb_seller.name, ROUND(CAST (SUM(price * quantity) AS numeric), 2)
+FROM INNER JOIN tb_seller ON tb_sale.seller_id = tb_seller.id GROUP BY tb_seller.name;
+
+/* SubConsultas */
+
+SELECT date, name FROM(
+    SELECT * FROM tb_sale INNER JOIN tb_seller ON tb_sale.seller_id = tb_seller.id
+) AS juncao WHERE price < 500;
+
+/* UNIAO */
+
+/* seria a forma de unificar dados de dois ou mais tabelas sem repetição! */
+
+SELECT id, date FROM tb_sale WHERE price > 800
+
+UNIAO ALL /* Para dados repetidos */
+
+SELECT tb_sale.id, date FROM tb_sale INNER JOIN tb_seller ON tb_sale.seller_id = tb_seller.id WHERE name = 'dados que deseja ser pesquisado';
+
+/* DIFERENÇA */
+
+SELECT id, date, quantity FROM tb_sale WHERE date NOT IN(
+    SELECT date FROM tb_sale INNER JOIN tb_seller
+    ON tb_sale.seller_id = tb_seller.id WHERE name = 'Dados que deseja eliminar'
+);
