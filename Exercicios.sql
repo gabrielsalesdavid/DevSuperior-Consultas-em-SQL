@@ -9,3 +9,9 @@ SELECT name, street FROM customers WHERE city = 'Porto Alegre';
 /* Exercicio 2604 */
 
 SELECT id, name FROM products WHERE price < 10 OR price > 100;
+
+/* Exercicio 2605 */
+
+SELECT products.name, providers.name FROM products
+INNER JOIN providers ON providers.id = products.id_providers
+WHERE products.id_categories = 6;
