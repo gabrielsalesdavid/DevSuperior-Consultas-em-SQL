@@ -20,3 +20,7 @@ WHERE products.id_categories = 6;
 
 SELECT products.id, products.name FROM products
 INNER JOIN categories ON categories.id = products.id_categories WHERE categories.name LIKE 'super%';
+
+/* Exercicio 2607 */
+
+SELECT DISTINCT city FROM providers ORDER BY city ASC;
