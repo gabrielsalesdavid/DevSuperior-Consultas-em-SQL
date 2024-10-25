@@ -24,3 +24,7 @@ INNER JOIN categories ON categories.id = products.id_categories WHERE categories
 /* Exercicio 2607 */
 
 SELECT DISTINCT city FROM providers ORDER BY city ASC;
+
+/* Exercicio 2608 */
+
+SELECT MAX(price) AS price, MIN(price) AS price FROM products;

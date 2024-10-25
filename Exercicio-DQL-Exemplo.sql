@@ -208,7 +208,7 @@ SELECT DISTINCT tb_seller.id, name FROM tb_sale INNER JOIN tb_seller ON tb_selle
 
 /* ODER BY seria uma forma mais ordenada de organizar os dados da tabela */
 
-SELECT * FROM tb_sale ORDER BY seller_id, pric;
+SELECT * FROM tb_sale ORDER BY seller_id, price;
 
 /* TOP seria as tres primeiras linhas */
 
@@ -220,7 +220,7 @@ SELECT * FROM tb_sale ORDER BY price DESC LIMIT 3 OFFSET 0;
 
 /* GROUP BY */
 
-/* uma forma praica para relatorios */
+/* uma forma pratica para relatorios */
 
 SELECT date, COUNT(date) AS contagem FROM tb_sale GROUP BY date;
 
@@ -239,7 +239,7 @@ SELECT date, name FROM(
 
 SELECT id, date FROM tb_sale WHERE price > 800
 
-UNIAO ALL /* Para dados repetidos */
+UNION ALL /* Para dados repetidos */
 
 SELECT tb_sale.id, date FROM tb_sale INNER JOIN tb_seller ON tb_sale.seller_id = tb_seller.id WHERE name = 'dados que deseja ser pesquisado';
 
