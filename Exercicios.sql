@@ -38,3 +38,8 @@ GROUP BY categories.name ORDER BY SUM(products.amount);
 /* Exercicio 2610 */
 
 SELECT ROUND(AVG(price), 2) AS price FROM products;
+
+/* Exercicio 2611 */
+
+SELECT movies.id, movies.name FROM movies
+INNER JOIN genres ON movies.id_genres = genres.id WHERE genres.description = 'Action';
