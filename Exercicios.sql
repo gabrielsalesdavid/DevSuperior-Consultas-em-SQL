@@ -34,3 +34,7 @@ SELECT MAX(price) AS price, MIN(price) AS price FROM products;
 SELECT categories.name, SUM(products.amount) FROM categories
 INNER JOIN products ON products.id_categories = categories.id
 GROUP BY categories.name ORDER BY SUM(products.amount);
+
+/* Exercicio 2610 */
+
+SELECT ROUND(AVG(price), 2) AS price FROM products;
