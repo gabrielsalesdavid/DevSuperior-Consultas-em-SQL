@@ -28,3 +28,9 @@ SELECT DISTINCT city FROM providers ORDER BY city ASC;
 /* Exercicio 2608 */
 
 SELECT MAX(price) AS price, MIN(price) AS price FROM products;
+
+/* Exercicio 2609 */
+
+SELECT categories.name, SUM(products.amount) FROM categories
+INNER JOIN products ON products.id_categories = categories.id
+GROUP BY categories.name ORDER BY SUM(products.amount);
