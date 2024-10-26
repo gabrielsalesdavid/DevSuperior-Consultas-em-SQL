@@ -43,3 +43,7 @@ SELECT ROUND(AVG(price), 2) AS price FROM products;
 
 SELECT movies.id, movies.name FROM movies
 INNER JOIN genres ON movies.id_genres = genres.id WHERE genres.description = 'Action';
+
+/* Exercicio 2613 */
+
+SELECT movies.id, movies.name FROM movies INNER JOIN prices ON movies.id_prices = prices.id WHERE prices.value < 2.00;
