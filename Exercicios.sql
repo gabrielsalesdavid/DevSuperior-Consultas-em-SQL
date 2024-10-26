@@ -47,3 +47,16 @@ INNER JOIN genres ON movies.id_genres = genres.id WHERE genres.description = 'Ac
 /* Exercicio 2613 */
 
 SELECT movies.id, movies.name FROM movies INNER JOIN prices ON movies.id_prices = prices.id WHERE prices.value < 2.00;
+
+/* Exercicio 2614 */
+
+SELECT customers.name, rentals.rentals_date FROM customers
+INNER JOIN rentals ON rentals.id_customers = customers.id
+WHERE rentals_date >= '2016-09-01' AND rentals_date <= '2016-10-01';
+
+/* OU */
+
+SELECT customers.name, rentals.rentals_date FROM customers
+INNER JOIN rentals ON rentals.id_customers = customers.id
+WHERE EXTRACT(MONTH FROM rentals.rentals_date) = 9
+AND EXTRACT(YEAR FROM rentals.rentals_date) = 2016;

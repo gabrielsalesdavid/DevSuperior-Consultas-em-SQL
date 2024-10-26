@@ -111,7 +111,7 @@ SELECT id, date, ROUND(price, 2), quantity FROM tb_sale;
 
 SELECT id, date, ROUND(CAST(price AS numeric), 2), quantity FROM tb_sale;
 
-/* Funções DAY, MONTH, YER, EXTRACT */
+/* Funções DAY, MONTH, YEAR, EXTRACT */
 
 /* Extrair datas de forma por dias */
 
