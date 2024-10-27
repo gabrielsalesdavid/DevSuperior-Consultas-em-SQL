@@ -106,3 +106,20 @@ SELECT products.name, providers.name, products.price FROM categories
 INNER JOIN products ON products.id_categories = categories.id
 INNER JOIN providers ON products.id_providers = providers.id
 WHERE products.price >= 1000 AND categories.name = 'Super Luxury';
+
+/* Exercico 2620 */
+
+/* Sem formatação de Data */
+
+SELECT customers.name, orders.id FROM orders INNER JOIN customers ON orders.id_customers = customers.id
+WHERE orders_date >= '2016-01-01' AND orders_date <= '2016-06-30';
+
+/* Sem formatação de Data */
+
+SELECT customers.name, orders.id FROM customers INNER JOIN orders ON customers.id = orders.id_customers
+WHERE orders.orders_date BETWEEN '2016-01-01' AND '2016-06-30';
+
+/* Com formatação de Data */
+
+SELECT customers.name, orders.id FROM customers INNER JOIN orders ON customers.id = orders.id_customers
+WHERE orders.orders_date BETWEEN TO_DATE('01/0/2016', 'DD/MM/YYYY') AND TO_DATE('30/06/2016', 'DD/MM/YYYY');
