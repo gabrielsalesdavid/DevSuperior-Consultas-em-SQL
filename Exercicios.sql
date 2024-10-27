@@ -60,3 +60,14 @@ SELECT customers.name, rentals.rentals_date FROM customers
 INNER JOIN rentals ON rentals.id_customers = customers.id
 WHERE EXTRACT(MONTH FROM rentals.rentals_date) = 9
 AND EXTRACT(YEAR FROM rentals.rentals_date) = 2016;
+
+/* Exercico 2615 */
+
+SELECT DISTINCT customers.city FROM customers;
+
+/* Exercico 2616 */
+
+SELECT customers.id, customers.name FROM customers
+WHERE NOT EXISTS (SELECT id_customers FROM locations WHERE customers.id = locations.id_customers);
+
+SELECT customers.id, customers.name FROM customers WHERE customers.id NOT IN (SELECT id_customers FROM locations);
