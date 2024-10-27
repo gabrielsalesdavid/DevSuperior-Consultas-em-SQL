@@ -99,3 +99,10 @@ SELECT products.name, providers.name, categories.name FROM categories
 INNER JOIN products ON products.id_categories = categories.id
 INNER JOIN providers ON products.id_providers = providers.id
 WHERE categories.name = 'Imported' AND providers.name = 'Sansul SA';
+
+/* Exercico 2619 */
+
+SELECT products.name, providers.name, products.price FROM categories
+INNER JOIN products ON products.id_categories = categories.id
+INNER JOIN providers ON products.id_providers = providers.id
+WHERE products.price >= 1000 AND categories.name = 'Super Luxury';
