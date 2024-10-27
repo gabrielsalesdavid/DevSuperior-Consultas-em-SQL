@@ -70,4 +70,16 @@ SELECT DISTINCT customers.city FROM customers;
 SELECT customers.id, customers.name FROM customers
 WHERE NOT EXISTS (SELECT id_customers FROM locations WHERE customers.id = locations.id_customers);
 
+/* OU */
+
 SELECT customers.id, customers.name FROM customers WHERE customers.id NOT IN (SELECT id_customers FROM locations);
+
+/* Exercico 2617 */
+
+SELECT products.name, providers.name FROM products
+INNER JOIN providers ON products.id_providers = providers.id WHERE providers.id = 1;
+
+/* OU */
+
+SELECT products.name, providers.name FROM products
+INNER JOIN providers ON products.id_providers = providers.id WHERE providers.name LIKE 'Aja%';
