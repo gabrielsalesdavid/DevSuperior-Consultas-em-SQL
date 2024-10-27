@@ -83,3 +83,19 @@ INNER JOIN providers ON products.id_providers = providers.id WHERE providers.id 
 
 SELECT products.name, providers.name FROM products
 INNER JOIN providers ON products.id_providers = providers.id WHERE providers.name LIKE 'Aja%';
+
+/* Exercico 2618 */
+
+/* Se a condição fosse uma este exemplo seria aceito */
+
+SELECT products.name, providers.name, categories.name FROM categories
+INNER JOIN products ON products.id_categories = categories.id
+INNER JOIN providers ON products.id_providers = providers.id
+WHERE categories.name LIKE 'Imp%';
+
+/* OU */
+
+SELECT products.name, providers.name, categories.name FROM categories
+INNER JOIN products ON products.id_categories = categories.id
+INNER JOIN providers ON products.id_providers = providers.id
+WHERE categories.name = 'Imported' AND providers.name = 'Sansul SA';
