@@ -162,3 +162,18 @@ SELECT COUNT(city) FROM customers WHERE customers.state = 'RS';
 /* OU */
 
 SELECT COUNT(DISTINCT city) FROM customers;
+
+/* Exercico 2737 */
+
+(SELECT lawyers.name, customers_number
+FROM lawyers
+ORDER BY customers_number DESC
+LIMIT 1)
+ UNION ALL
+(SELECT lawyers.name, customers_number
+FROM lawyers
+ORDER BY customers_number ASC
+LIMIT 1)
+UNION ALL
+(SELECT 'Average', round(AVG(customers_number), 0)
+FROM lawyers);
