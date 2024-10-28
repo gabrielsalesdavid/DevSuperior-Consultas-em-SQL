@@ -133,3 +133,14 @@ WHERE products.amount >= 10 AND products.amount <= 20 AND providers.name LIKE 'P
 
 SELECT products.name FROM products INNER JOIN providers ON products.id_providers = providers.id
 WHERE (products.amount BETWEEN 10 AND 20) AND (providers.name LIKE 'P%');
+
+/* Exercico 2622 */
+
+/* Traz valores entre o id 4 e 5 */
+
+SELECT customers.name FROM legal_person INNER JOIN customers ON legal_person.id_customers = customers.id
+WHERE customers.id BETWEEN 4 AND 5;
+
+/* OU */
+
+SELECT customers.name FROM legal_person INNER JOIN customers ON legal_person.id_customers = customers.id;
