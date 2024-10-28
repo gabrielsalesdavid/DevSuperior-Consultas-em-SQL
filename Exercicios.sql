@@ -123,3 +123,13 @@ WHERE orders.orders_date BETWEEN '2016-01-01' AND '2016-06-30';
 
 SELECT customers.name, orders.id FROM customers INNER JOIN orders ON customers.id = orders.id_customers
 WHERE orders.orders_date BETWEEN TO_DATE('01/0/2016', 'DD/MM/YYYY') AND TO_DATE('30/06/2016', 'DD/MM/YYYY');
+
+/* Exercico 2621 */
+
+SELECT products.name FROM products INNER JOIN providers ON products.id_providers = providers.id
+WHERE products.amount >= 10 AND products.amount <= 20 AND providers.name LIKE 'P%';
+
+/* OU */
+
+SELECT products.name FROM products INNER JOIN providers ON products.id_providers = providers.id
+WHERE (products.amount BETWEEN 10 AND 20) AND (providers.name LIKE 'P%');
