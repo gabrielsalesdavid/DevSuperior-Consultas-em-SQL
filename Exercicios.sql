@@ -184,3 +184,7 @@ SELECT candidate.name,
 CAST((((score.math * 2) + (score.specific * 3) + (score.project_plan * 5)) / 10) AS NUMERIC(15, 2))
 AS avg
 FROM score INNER JOIN candidate ON score.candidate_id = candidate.id ORDER BY avg DESC;
+
+/* Exercico 2739 */
+
+SELECT loan.name, CAST(EXTRACT(DAY FROM payday) AS INT) AS day FROM loan;
