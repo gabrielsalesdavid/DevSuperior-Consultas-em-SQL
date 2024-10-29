@@ -163,6 +163,14 @@ SELECT COUNT(city) FROM customers WHERE customers.state = 'RS';
 
 SELECT COUNT(DISTINCT city) FROM customers;
 
+/* Exercico 2625 */
+
+SELECT
+SUBSTRING(cpf, 1, 3) || '.' ||
+SUBSTRING(cpf, 4, 3) || '.' ||
+SUBSTRING(cpf, 7, 3) || '-' ||
+SUBSTRING(cpf, 10, 2) FROM natural_person;
+
 /* Exercico 2737 */
 
 (SELECT lawyers.name, customers_number
@@ -188,3 +196,12 @@ FROM score INNER JOIN candidate ON score.candidate_id = candidate.id ORDER BY av
 /* Exercico 2739 */
 
 SELECT loan.name, CAST(EXTRACT(DAY FROM payday) AS INT) AS day FROM loan;
+
+/* Exercico 2740 */
+
+(SELECT
+CONCAT('Podium: ', team) AS name
+FROM league WHERE position <=3)
+UNION ALL
+(SELECT CONCAT ('Demoted: ', team) AS name
+FROM league WHERE position >= 14);
