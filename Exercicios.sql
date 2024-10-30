@@ -209,3 +209,9 @@ FROM league WHERE position >= 14);
 /* Exercico 2741 */
 
 SELECT CONCAT('Approved: ', name) AS name, grade FROM students WHERE grade >= 7 ORDER BY grade DESC;
+
+/* Exercico 2742 */
+
+SELECT life_registry.name, ROUND((life_registry.omega * 1.618), 3) AS "The N Factor"
+FROM life_registry INNER JOIN dimensions ON life_registry.dimensions_id = dimensions.id
+WHERE dimensions.name IN('C875', 'C774') AND life_registry.name LIKE 'Richard%' ORDER BY life_registry ASC;
