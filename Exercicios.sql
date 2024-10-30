@@ -251,3 +251,26 @@ FROM teams
 LEFT JOIN matches ON teams.id = matches.team_1 OR teams.id = matches.team_2
 GROUP BY teams.name
 ORDER BY matches DESC, victories DESC, defeats DESC;
+
+/* Exercico 2989 */
+
+SELECT departamento.nome AS "departamento", divisao.nome AS "divisao",
+ROUND(AVG(tipo_salario.salario - tipo_descontos.descontos), 2) AS "media",
+ROUND(MAX(tipo_salario.salario - tipo_descontos.descontos), 2) AS "maior"
+FROM departamento
+INNER JOIN divisao ON departamento.cod_dep = divisao.cod_dep
+INNER JOIN empregado ON divisao.cod_divisao = empregado.lotacao_div
+INNER JOIN(
+           SELECT empregado.matr, COALESCE(SUM(vencimento.valor), 0) AS "salario"
+           FROM empregado
+		   LEFT JOIN emp_venc ON empregado.matr = emp_venc.matr
+		   LEFT JOIN vencimento ON emp_venc.cod_venc = vencimento.cod_venc
+		   GROUP BY empregado.matr) AS "tipo_salario" ON empregado.matr = tipo_salario.matr
+INNER JOIN(
+           SELECT empregado.matr, COALESCE(SUM(desconto.valor), 0) AS "descontos"
+		   FROM empregado
+		   LEFT JOIN emp_desc ON empregado.matr = emp_desc.matr
+		   LEFT JOIN desconto ON emp_desc.cod_desc = desconto.cod_desc
+		   GROUP BY empregado.matr) AS "tipo_descontos" ON empregado.matr = tipo_descontos.matr
+GROUP BY divisao.cod_divisao, divisao.nome, departamento.nome
+ORDER BY AVG(tipo_salario.salario - tipo_descontos.descontos) DESC;
