@@ -205,3 +205,7 @@ FROM league WHERE position <=3)
 UNION ALL
 (SELECT CONCAT ('Demoted: ', team) AS name
 FROM league WHERE position >= 14);
+
+/* Exercico 2741 */
+
+SELECT CONCAT('Approved: ', name) AS name, grade FROM students WHERE grade >= 7 ORDER BY grade DESC;
