@@ -280,3 +280,29 @@ ORDER BY AVG(tipo_salario.salario - tipo_descontos.descontos) DESC;
 SELECT empregados.cpf, empregados.enome, departamentos.dnome FROM empregados
 INNER JOIN departamentos ON empregados.dnumero = departamentos.dnumero
 WHERE empregados.cpf_supervisor IS NULL ORDER BY empregados.cpf;
+
+/* Exercico 2991 */
+
+SELECT departamento.nome AS "Nome Departamento",
+COUNT(empregado.matr) AS "Numero de Empregados",
+TO_CHAR((AVG(tipo_salario.salario - tipo_descontos.descontos)), '99999.99') AS "Media Salarial",
+TO_CHAR((MAX(tipo_salario.salario - tipo_descontos.descontos)), '99999.99') AS "Maior Salario",
+(CASE WHEN
+		  MIN(tipo_salario.salario - tipo_descontos.descontos) = 0 THEN '0'
+		  ELSE TO_CHAR((MIN(tipo_salario.salario - tipo_descontos.descontos)), '99999.99') END) AS "Menor Salario"
+FROM departamento
+INNER JOIN empregado ON departamento.cod_dep = empregado.lotacao
+INNER JOIN(
+           SELECT empregado.matr, COALESCE(SUM(vencimento.valor), 0) AS "salario"
+		   FROM empregado
+		   LEFT JOIN emp_venc ON empregado.matr = emp_venc.matr
+		   LEFT JOIN vencimento ON emp_venc.cod_venc = vencimento.cod_venc
+		   GROUP BY empregado.matr) AS "tipo_salario" ON empregado.matr = tipo_salario.matr
+INNER JOIN(
+           SELECT empregado.matr, COALESCE(SUM(desconto.valor), 0) AS "descontos"
+		   FROM empregado
+		   LEFT JOIN emp_desc ON empregado.matr = emp_desc.matr
+		   LEFT JOIN desconto ON emp_desc.cod_desc = desconto.cod_desc
+		   GROUP BY empregado.matr) AS "tipo_descontos" ON empregado.matr = tipo_descontos.matr
+GROUP BY departamento.cod_dep, departamento.nome
+ORDER BY "Media Salarial" DESC;
