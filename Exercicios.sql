@@ -274,3 +274,9 @@ INNER JOIN(
 		   GROUP BY empregado.matr) AS "tipo_descontos" ON empregado.matr = tipo_descontos.matr
 GROUP BY divisao.cod_divisao, divisao.nome, departamento.nome
 ORDER BY AVG(tipo_salario.salario - tipo_descontos.descontos) DESC;
+
+/* Exercico 2990 */
+
+SELECT empregados.cpf, empregados.enome, departamentos.dnome FROM empregados
+INNER JOIN departamentos ON empregados.dnumero = departamentos.dnumero
+WHERE empregados.cpf_supervisor IS NULL ORDER BY empregados.cpf;
