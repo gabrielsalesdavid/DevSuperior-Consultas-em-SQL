@@ -223,3 +223,11 @@ SELECT name, CHAR_LENGTH(name) AS "length" FROM people ORDER BY length DESC;
 /* Exercico 2744 */
 
 SELECT account.id, account.password, MD5(password) AS "MD5" FROM account;
+
+/* Exercico 2745 */
+
+SELECT people.name, ROUND((people.salary * 0.10), 2) AS "tax" FROM people WHERE salary > 3000;
+
+/* OU */
+
+SELECT people.name, ROUND(((people.salary * 10)/ 100), 2) AS "tax" FROM people WHERE salary > 3000;
