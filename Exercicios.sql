@@ -231,3 +231,7 @@ SELECT people.name, ROUND((people.salary * 0.10), 2) AS "tax" FROM people WHERE 
 /* OU */
 
 SELECT people.name, ROUND(((people.salary * 10)/ 100), 2) AS "tax" FROM people WHERE salary > 3000;
+
+/* Exercico 2746 */
+
+SELECT REPLACE(name, 'H1', 'X') AS "name" FROM virus;
