@@ -306,3 +306,76 @@ INNER JOIN(
 		   GROUP BY empregado.matr) AS "tipo_descontos" ON empregado.matr = tipo_descontos.matr
 GROUP BY departamento.cod_dep, departamento.nome
 ORDER BY "Media Salarial" DESC;
+
+/* Exercico 2992 */
+
+SELECT * FROM(
+	SELECT departamento.nome, divisao.nome AS Divisao,
+	ROUND(AVG(tipo_salario.salario - tipo_descontos.descontos), 2) AS Media
+	FROM divisao
+		INNER JOIN empregado ON divisao.cod_divisao = empregado.lotacao_div
+		INNER JOIN departamento ON divisao.cod_dep = departamento.cod_dep
+		INNER JOIN(
+				   SELECT empregado.matr, COALESCE(SUM(vencimento.valor), 0) AS "salario"
+				   FROM empregado
+				   	    LEFT JOIN emp_venc ON empregado.matr = emp_venc.matr
+					    LEFT JOIN vencimento ON emp_venc.cod_venc = vencimento.cod_venc
+					    GROUP BY empregado.matr) AS "tipo_salario" ON empregado.matr = tipo_salario.matr
+				    INNER JOIN(
+                            SELECT empregado.matr, COALESCE(SUM(desconto.valor), 0) AS "descontos"
+                            FROM empregado
+							    LEFT JOIN emp_desc ON empregado.matr = emp_desc.matr
+								LEFT JOIN desconto ON emp_desc.cod_desc = desconto.cod_desc
+							GROUP BY empregado.matr) AS "tipo_descontos" ON empregado.matr = tipo_descontos.matr
+                    WHERE divisao.cod_dep = 1 AND departamento.cod_dep = 1
+				    GROUP BY divisao.cod_divisao, departamento.nome, divisao.nome
+				    ORDER BY AVG(tipo_salario.salario - tipo_descontos.descontos) DESC
+        LIMIT 1) AS "T"
+UNION ALL
+SELECT * FROM(
+        SELECT departamento.nome, divisao.nome AS Divisao,
+	    ROUND(AVG(tipo_salario.salario - tipo_descontos.descontos), 2) AS Media
+	    FROM divisao
+	        INNER JOIN empregado ON divisao.cod_divisao = empregado.lotacao_div
+		    INNER JOIN departamento ON divisao.cod_dep = departamento.cod_dep
+		    INNER JOIN(
+                    SELECT empregado.matr, COALESCE(SUM(vencimento.valor), 0) AS "salario"
+                    FROM empregado
+                        LEFT JOIN emp_venc ON empregado.matr = emp_venc.matr
+                        LEFT JOIN vencimento ON emp_venc.cod_venc = vencimento.cod_venc
+                    GROUP BY empregado.matr) AS "tipo_salario" ON empregado.matr = tipo_salario.matr
+            INNER JOIN(
+                    SELECT empregado.matr,
+					COALESCE(SUM(desconto.valor), 0) AS "descontos"
+					FROM empregado
+					    LEFT JOIN emp_desc ON empregado.matr = emp_desc.matr
+						LEFT JOIN desconto ON emp_desc.cod_desc = desconto.cod_desc
+				    GROUP BY empregado.matr) AS "tipo_descontos" ON empregado.matr = tipo_descontos.matr
+                    WHERE divisao.cod_dep = 2 AND departamento.cod_dep = 2
+		            GROUP BY divisao.cod_divisao, departamento.nome, divisao.nome
+		            ORDER BY AVG(tipo_salario.salario - tipo_descontos.descontos) DESC
+		LIMIT 1) AS "T"
+UNION ALL
+SELECT * FROM(
+            SELECT departamento.nome, divisao.nome AS Divisao,
+			    ROUND(AVG(tipo_salario.salario - tipo_descontos.descontos), 2) AS Media
+			    FROM divisao
+			        INNER JOIN empregado ON divisao.cod_divisao = empregado.lotacao_div
+				    INNER JOIN departamento ON divisao.cod_dep = departamento.cod_dep
+				    INNER JOIN(
+				            SELECT empregado.matr, COALESCE(SUM(vencimento.valor), 0) AS "salario"
+                            FROM empregado
+							    LEFT JOIN emp_venc ON empregado.matr = emp_venc.matr
+								LEFT JOIN vencimento ON emp_venc.cod_venc = vencimento.cod_venc
+                            GROUP BY empregado.matr) AS "tipo_salario" ON empregado.matr = tipo_salario.matr
+                    INNER JOIN(
+                            SELECT empregado.matr, COALESCE(SUM(desconto.valor), 0) AS "descontos"
+							FROM empregado
+							 	LEFT JOIN emp_desc ON empregado.matr = emp_desc.matr
+								LEFT JOIN desconto ON emp_desc.cod_desc = desconto.cod_desc
+				    GROUP BY empregado.matr) AS "tipo_descontos" ON empregado.matr = tipo_descontos.matr
+                WHERE divisao.cod_dep = 3 AND departamento.cod_dep = 3
+			    GROUP BY divisao.cod_divisao, departamento.nome, divisao.nome
+			    ORDER BY AVG(tipo_salario.salario - tipo_descontos.descontos) DESC
+		LIMIT 1) AS "T"
+	ORDER BY Media DESC;
