@@ -398,3 +398,13 @@ AS "salary" FROM attendances
 INNER JOIN doctors ON attendances.id_doctor = doctors.id
 INNER JOIN work_shifts ON attendances.id_work_shift = work_shifts.id
 GROUP BY doctors.name ORDER BY salary DESC;
+
+/* Exercico 2995 */
+
+SELECT temperature, COUNT(temperature) AS "number_of_records"
+FROM records GROUP BY mark, temperature ORDER BY mark;
+
+/* OU */
+
+SELECT temperature, CONCAT(COUNT(mark)) AS "number_of_records"
+FROM records GROUP BY mark, temperature ORDER BY mark;
