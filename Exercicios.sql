@@ -408,3 +408,23 @@ FROM records GROUP BY mark, temperature ORDER BY mark;
 
 SELECT temperature, CONCAT(COUNT(mark)) AS "number_of_records"
 FROM records GROUP BY mark, temperature ORDER BY mark;
+
+/* Exercico 2996 */
+
+SELECT packages.year, user_sender.name, user_receiver.name
+FROM packages
+INNER JOIN users user_sender ON packages.id_user_sender = user_sender.id
+INNER JOIN users user_receiver ON packages.id_user_receiver = user_receiver.id
+WHERE (packages.color = 'blue' OR packages.year = '2015')
+AND user_sender.address != 'Taiwan'
+AND user_receiver.address != 'Taiwan'
+ORDER BY packages.year DESC;
+
+/* OU */
+
+SELECT packages.year, user_sender.name, user_receiver.name
+FROM packages
+INNER JOIN users user_sender ON packages.id_user_sender = user_sender.id AND user_sender.address NOT LIKE 'Taiw%'
+INNER JOIN users user_receiver ON packages.id_user_receiver = user_receiver.id AND user_receiver.address NOT LIKE 'Taiw%'
+WHERE packages.color LIKE 'blu%' OR packages.year = '2015'
+ORDER BY packages.year DESC;
