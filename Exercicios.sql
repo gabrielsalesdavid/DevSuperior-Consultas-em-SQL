@@ -379,3 +379,22 @@ SELECT * FROM(
 			    ORDER BY AVG(tipo_salario.salario - tipo_descontos.descontos) DESC
 		LIMIT 1) AS "T"
 	ORDER BY Media DESC;
+
+/* Exercico 2993 */
+
+SELECT amount FROM value_table GROUP BY amount HAVING COUNT(*) <= 12 ORDER BY COUNT(*) DESC LIMIT 1;
+
+/* Exercico 2994 */
+
+SELECT doctors.name, SUM(ROUND((attendances.hours * 150) * (1 + work_shifts.bonus / 100), 1)) AS "salary" FROM attendances
+INNER JOIN doctors ON attendances.id_doctor = doctors.id
+INNER JOIN work_shifts ON attendances.id_work_shift = work_shifts.id
+GROUP BY doctors.name ORDER BY salary DESC;
+
+/* OU */
+
+SELECT doctors.name, ROUND(SUM(attendances.hours * 150 + work_shifts.bonus * 0.01 * attendances.hours * 150), 1)
+AS "salary" FROM attendances
+INNER JOIN doctors ON attendances.id_doctor = doctors.id
+INNER JOIN work_shifts ON attendances.id_work_shift = work_shifts.id
+GROUP BY doctors.name ORDER BY salary DESC;
