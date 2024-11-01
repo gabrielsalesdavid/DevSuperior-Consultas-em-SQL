@@ -428,3 +428,27 @@ INNER JOIN users user_sender ON packages.id_user_sender = user_sender.id AND use
 INNER JOIN users user_receiver ON packages.id_user_receiver = user_receiver.id AND user_receiver.address NOT LIKE 'Taiw%'
 WHERE packages.color LIKE 'blu%' OR packages.year = '2015'
 ORDER BY packages.year DESC;
+
+/* Exercico 2997 */
+
+SELECT departamento.nome AS "Departamento", empregado.nome
+AS "Empregado", t1.Salario_Bruto, t2.Total_Desconto, (t1.Salario_Bruto - t2.Total_Desconto)
+AS Salario_Liquido
+FROM empregado
+		INNER JOIN departamento ON empregado.lotacao = departamento.cod_dep
+		INNER JOIN(
+			SELECT empregado.matr,
+				COALESCE(SUM(vencimento.valor), 0) AS Salario_Bruto
+			FROM empregado
+					LEFT JOIN emp_venc ON empregado.matr = emp_venc.matr
+					LEFT JOIN vencimento ON emp_venc.cod_venc = vencimento.cod_venc
+			GROUP BY empregado.matr) AS t1 ON empregado.matr = t1.matr
+		INNER JOIN(
+			SELECT empregado.matr,
+				COALESCE(SUM(desconto.valor), 0) AS Total_Desconto
+			FROM empregado
+					LEFT JOIN emp_desc ON empregado.matr = emp_desc.matr
+					LEFT JOIN desconto ON emp_desc.cod_desc = desconto.cod_desc
+			GROUP BY empregado.matr) AS t2 ON empregado.matr = t2.matr
+GROUP BY empregado.matr, departamento.nome, empregado.nome, t1.Salario_Bruto, t2.Total_Desconto
+ORDER BY(t1.Salario_Bruto - t2.Total_Desconto) DESC;
