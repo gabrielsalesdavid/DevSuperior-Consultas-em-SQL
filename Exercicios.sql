@@ -20,6 +20,12 @@ SELECT products.name, providers.name FROM products
 INNER JOIN providers ON providers.id = products.id_providers
 WHERE products.id_categories = 6;
 
+/* ou */
+
+SELECT products.name, providers.name FROM products
+INNER JOIN providers ON providers.id = products.id_providers
+WHERE products.id_categories IN(6);
+
 /* Exercicio 2606 */
 
 SELECT products.id, products.name FROM products
