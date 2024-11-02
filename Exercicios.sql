@@ -583,3 +583,12 @@ INNER JOIN media_salarial_div
 INNER JOIN empregado
 	ON salarios.matr = empregado.matr
 ORDER BY salarios.lotacao_div;
+
+/* Exercico 3001 */
+
+SELECT products.name,
+CASE WHEN products.type = 'A' THEN 20.0 ELSE
+CASE WHEN products.type = 'B' THEN 70.0 ELSE
+CASE WHEN products.type = 'C' THEN 530.5 ELSE 0 END END END AS "price"
+FROM products
+ORDER BY products.type, products.id DESC;
