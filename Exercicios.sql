@@ -10,6 +10,10 @@ SELECT name, street FROM customers WHERE city = 'Porto Alegre';
 
 SELECT id, name FROM products WHERE price < 10 OR price > 100;
 
+/* ou */
+
+SELECT products.id, products.name FROM products WHERE price NOT BETWEEN 10 AND 100;
+
 /* Exercicio 2605 */
 
 SELECT products.name, providers.name FROM products
